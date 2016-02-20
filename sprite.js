@@ -11,7 +11,7 @@ function Sprite(name, x, y, width, height) {
     this.image = new Image();
 
     this.load = function (imageName) {
-        this.image.src = imageName + ".png";
+        this.image.src = "sprites/" + imageName + ".png";
     };
 
     this.draw = function(ctx) {

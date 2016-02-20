@@ -1,3 +1,0 @@
-Game loop
-  update(),
-  draw()
