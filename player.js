@@ -37,7 +37,7 @@ function Player(name, x, y, width, height, velX, velY, speed) {
             }
         }
 
-        if (now > this.lastShoot + this.fireRate) {
+        if ((now > this.lastShoot + this.fireRate) && this.isShooting) {
             this.shoot(projectileArray);
             this.lastShoot = now;
         }
