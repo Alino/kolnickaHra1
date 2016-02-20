@@ -3,14 +3,64 @@
 <head>
     <meta charset="UTF">
     <title>Game</title>
+    <script language="JavaScript" src="sprite.js" type="text/javascript"></script>
+    <script language="JavaScript" src="player.js" type="text/javascript"></script>
 </head>
 <body>
-    <canvas id="Canvas" width="500" height="500" style="border:1px solid #000000; background-color: black; "></canvas>
+    <div>
+        <canvas id="Canvas" width="500" height="500" style="border:1px solid #000000; background-color: black; "></canvas>
+    </div>
     <script type="text/javascript">
         (function () {
             var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
             window.requestAnimationFrame = requestAnimationFrame;
         })();
+
+
+        var player1 = new Player("player1", 225, 450, 50, 50, 0, 0, 10);
+        player1.sprite.load("player");
+
+        KEY_LEFT_ARROW = 37;
+        KEY_RIGHT_ARROW = 39;
+
+        document.addEventListener('keydown', function(event){
+            if (event.keyCode == KEY_LEFT_ARROW) {
+                player1.velX = (-player1.speed);
+            }
+            else if (event.keyCode == KEY_RIGHT_ARROW) {
+                player1.velX = player1.speed;
+            }
+        }, this);
+
+        document.addEventListener('keyup', function(event) {
+            if (event.keyCode == KEY_LEFT_ARROW) {
+                player1.velX = 0
+            }
+            else if (event.keyCode == KEY_RIGHT_ARROW) {
+                player1.velX = 0
+            }
+        }, this);
+
+        update = function() {
+            player1.update(ctx);
+        };
+
+        var ctx = document.getElementById("Canvas").getContext("2d");
+
+        var draw = function() {
+            ctx.clearRect(0, 0, 500, 500);
+            player1.sprite.draw(ctx);
+        };
+
+        function Gameloop() {
+            var now = Date.now();
+
+            update();
+            draw();
+            requestAnimationFrame(Gameloop);
+        }
+
+        Gameloop();
     </script>
 </body>
 </html>
